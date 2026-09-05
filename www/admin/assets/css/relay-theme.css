@@ -420,6 +420,12 @@ div.widgetToolbarBodyContent, div.widgetToolbarBodyLeft, div.widgetToolbarBodyRi
 }
 div.widgetToolbar, div.widgetToolbarBody { color: var(--rl-text-dim) !important; }
 div.widgetToolbarTitle { color: var(--rl-text) !important; }
+div.widgetToolbarButton, div.widgetToolbarButtonOpen, div.widgetToolbarButtonContainer {
+  background-image: none !important;
+  background: var(--rl-panel-alt) !important;
+  border-radius: var(--rl-radius) !important;
+  color: var(--rl-text-dim) !important;
+}
 
 /* Full-screen widget-picker overlay */
 div.dashboardOverlay { background-color: var(--rl-bg) !important; }
