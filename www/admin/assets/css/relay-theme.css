@@ -173,6 +173,11 @@ input[disabled], select[disabled], textarea[disabled] {
   background-color: #17181d !important;
   color: var(--rl-text-dim) !important;
 }
+input[type=checkbox], input[type=radio] {
+  accent-color: var(--rl-accent) !important;
+  width: 16px !important;
+  height: 16px !important;
+}
 
 /* ---------- Buttons ---------- */
 input[type=submit], input[type=button], button, button.flat {
