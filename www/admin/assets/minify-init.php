@@ -67,6 +67,13 @@ $oxpCssInstallRtl = array_merge($oxpCssRtl, ['css/install.css']);
 
 $oxpJsInstall = ['js/jquery.simplemodal.min.js', 'js/ox.install.js'];
 
+// Relay's own theme override (Broadstreet-inspired dark theme). Kept as a
+// separate file and appended last in every group below so it naturally wins
+// on cascade order rather than needing !important against unknown future
+// upstream selector ordering. See relay-theme.css's own header comment for
+// full rationale.
+$relayTheme = ['css/relay-theme.css'];
+
 
 //define groups used by minfier
 $MINIFY_JS_GROUPS = [
@@ -75,8 +82,8 @@ $MINIFY_JS_GROUPS = [
 ];
 
 $MINIFY_CSS_GROUPS = [
-    'oxp-css-ltr' => array_merge($commonCss, $oxpCssLtr),
-    'oxp-css-rtl' => array_merge($commonCss, $oxpCssRtl),
-    'oxp-css-install-ltr' => array_merge($commonCss, $oxpCssInstallLtr),
-    'oxp-css-install-rtl' => array_merge($commonCss, $oxpCssInstallRtl),
+    'oxp-css-ltr' => array_merge($commonCss, $oxpCssLtr, $relayTheme),
+    'oxp-css-rtl' => array_merge($commonCss, $oxpCssRtl, $relayTheme),
+    'oxp-css-install-ltr' => array_merge($commonCss, $oxpCssInstallLtr, $relayTheme),
+    'oxp-css-install-rtl' => array_merge($commonCss, $oxpCssInstallRtl, $relayTheme),
 ];

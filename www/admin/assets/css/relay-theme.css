@@ -1,0 +1,398 @@
+
+/* ============================================================
+   RELAY — Broadstreet-inspired theme override
+
+   Loaded last in every CSS bundle group (see
+   www/admin/assets/minify-init.php) so it naturally wins on
+   cascade order — most rules don't strictly need !important
+   for that reason, but some are kept on rules overriding very
+   old sprite-image-based components (dashboard widgets, the
+   legacy login table layout, panel borders) where the
+   underlying markup relies on multiple nested elements each
+   carrying their own background-image; !important there
+   guards against a later Revive Adserver update reintroducing
+   a slightly different selector order for those specific
+   components.
+
+   Kept intentionally separate from chrome.css and friends so
+   this file stays isolated, reviewable, and safe to diff
+   against upstream Revive Adserver on any future merge.
+
+   Added by Onyx, 6 Sep 2026. See memory/ad-delivery-platform.md
+   in the OpenClaw workspace for full design-reference notes
+   (Broadstreet screenshots) and rationale.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --rl-bg: #0c0c0f;
+  --rl-panel: #1a1b20;
+  --rl-panel-alt: #202127;
+  --rl-border: #2b2c33;
+  --rl-text: #f2f2f5;
+  --rl-text-dim: #9a9ba5;
+  --rl-accent: #7c6df0;
+  --rl-accent-hover: #6a5be0;
+  --rl-accent-soft: rgba(124,109,240,0.15);
+  --rl-success: #22c55e;
+  --rl-success-soft: rgba(34,197,94,0.15);
+  --rl-danger: #f16d75;
+  --rl-radius: 10px;
+  --rl-radius-lg: 14px;
+  --rl-radius-pill: 999px;
+}
+
+html, body, body.hasInterface, body.hasGradient, body.hasSidebar {
+  background: var(--rl-bg) !important;
+  color: var(--rl-text) !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+a { color: var(--rl-accent) !important; }
+a:hover { color: var(--rl-accent-hover) !important; }
+
+/* ---------- Header ---------- */
+#oaHeader {
+  background: var(--rl-panel) !important;
+  border-bottom: 1px solid var(--rl-border) !important;
+  box-shadow: none !important;
+  padding: 14px 20px !important;
+}
+#oaHeaderBranding {
+  background: none !important;
+  color: var(--rl-text) !important;
+  font-weight: 800 !important;
+  font-size: 18px !important;
+  letter-spacing: 0.02em;
+}
+#oaHeaderBranding::before { content: '\25C6  '; color: var(--rl-accent); }
+
+/* ---------- Top-right user/nav menu ---------- */
+#oaNavigationExtraTop, #oaNavigationExtra {
+  background: none !important;
+}
+#oaNavigationExtraTop a, #oaNavigationExtra a,
+#oaNavigationExtraTop li, #oaNavigationExtra li {
+  color: var(--rl-text-dim) !important;
+  background: none !important;
+}
+#oaNavigationExtraTop a:hover, #oaNavigationExtra a:hover {
+  color: var(--rl-text) !important;
+}
+
+/* ---------- Section tab navigation ---------- */
+#oaNavigation {
+  background: var(--rl-panel) !important;
+  border-bottom: 1px solid var(--rl-border) !important;
+}
+#oaNavigationTabs li,
+#oaNavigationTabs li div,
+#oaNavigationTabs li div.left,
+#oaNavigationTabs li div.right,
+#oaNavigationTabs li.first div.left,
+#oaNavigationTabs li.last div.right,
+#oaNavigationTabs li.active,
+#oaNavigationTabs li.active div.left,
+#oaNavigationTabs li.active div.right {
+  background: none !important;
+}
+#oaNavigationTabs li a, #oaNavigationTabs li span {
+  color: var(--rl-text-dim) !important;
+  background: none !important;
+  padding: 12px 16px !important;
+  display: inline-block !important;
+  font-weight: 500 !important;
+  border-bottom: 2px solid transparent !important;
+}
+#oaNavigationTabs li.active a, #oaNavigationTabs li.active span {
+  color: var(--rl-text) !important;
+  border-bottom: 2px solid var(--rl-accent) !important;
+}
+
+/* ---------- Content areas ---------- */
+#firstLevelContent { background: var(--rl-bg) !important; }
+#secondLevelContent {
+  background: var(--rl-panel) !important;
+  border: 1px solid var(--rl-border) !important;
+  border-radius: var(--rl-radius-lg) !important;
+  margin: 20px !important;
+  padding: 24px !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+}
+.tableWrapper {
+  background: var(--rl-panel) !important;
+  border: 1px solid var(--rl-border) !important;
+  border-radius: var(--rl-radius) !important;
+}
+
+/* ---------- Headings / helper text ---------- */
+h1, h2, h3, .tab-s {
+  color: var(--rl-text) !important;
+  font-weight: 700 !important;
+}
+.install, p.help, .oa-help-text {
+  color: var(--rl-text-dim) !important;
+}
+
+/* ---------- Form fields ---------- */
+input.flat, select.flat, textarea.flat, textarea,
+input[type=text], input[type=password], input[type=email], input[type=number] {
+  background: #0f1014 !important;
+  border: 1px solid var(--rl-border) !important;
+  color: var(--rl-text) !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+}
+input.flat:focus, textarea:focus,
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+  background: #14151b !important;
+  border-color: var(--rl-accent) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--rl-accent-soft) !important;
+}
+input[disabled], select[disabled], textarea[disabled] {
+  background-color: #17181d !important;
+  color: var(--rl-text-dim) !important;
+}
+
+/* ---------- Buttons ---------- */
+input[type=submit], input[type=button], button, button.flat {
+  background: var(--rl-accent) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--rl-radius-pill) !important;
+  padding: 10px 22px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+}
+input[type=submit]:hover, input[type=button]:hover, button:hover {
+  background: var(--rl-accent-hover) !important;
+}
+
+/* ---------- Login page: reshape the legacy table layout into a centered card ---------- */
+form.login {
+  display: block !important;
+  max-width: 380px !important;
+  margin: 60px auto !important;
+  background: var(--rl-panel) !important;
+  border: 1px solid var(--rl-border) !important;
+  border-radius: var(--rl-radius-lg) !important;
+  padding: 32px !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5) !important;
+}
+form.login table, form.login table tr, form.login table td {
+  display: block !important;
+  width: auto !important;
+  background: none !important;
+}
+form.login img.break { display: none !important; }
+form.login img[src*="login-welcome"] { display: block !important; margin: 0 auto 16px !important; }
+form.login .tab-s {
+  display: block !important;
+  font-size: 22px !important;
+  text-align: center !important;
+  margin-bottom: 4px !important;
+}
+form.login .install {
+  display: block !important;
+  text-align: center !important;
+  margin-bottom: 24px !important;
+}
+form.login table table td:first-child {
+  display: block !important;
+  font-size: 13px !important;
+  color: var(--rl-text-dim) !important;
+  margin-top: 14px !important;
+  margin-bottom: 4px !important;
+}
+form.login input.flat { width: 100% !important; margin-bottom: 0 !important; }
+form.login input[type=submit] {
+  width: 100% !important;
+  margin-top: 20px !important;
+  padding: 12px !important;
+  font-size: 15px !important;
+}
+form.login a { display: block !important; text-align: center !important; margin-top: 16px !important; font-size: 13px !important; }
+
+/* ---------- Tables / data grids ---------- */
+.tableWrapper table, table.dataTable, table { color: var(--rl-text) !important; }
+.tableHeader, th {
+  background: var(--rl-panel-alt) !important;
+  color: var(--rl-text-dim) !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  letter-spacing: 0.05em !important;
+  border-color: var(--rl-border) !important;
+}
+td { border-color: var(--rl-border) !important; color: var(--rl-text) !important; }
+tr:hover td { background: var(--rl-panel-alt) !important; }
+
+/* ---------- Scrollbars ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--rl-bg); }
+::-webkit-scrollbar-thumb { background: var(--rl-border); border-radius: 6px; }
+
+/* ---------- Round 2: table row states + account/network switcher dropdown ---------- */
+.tableWrapper table tbody tr.even { background-color: var(--rl-panel) !important; }
+.tableWrapper table tbody tr.odd { background-color: var(--rl-panel-alt) !important; }
+.tableWrapper table tbody tr:hover { background-color: rgba(124,109,240,0.10) !important; }
+.tableWrapper table tbody tr.hl { background-color: var(--rl-success-soft) !important; }
+.tableWrapper table tbody tr.active { background-color: var(--rl-accent-soft) !important; }
+.tableWrapper .pager .summary, .tableWrapper .pager .summary em { color: var(--rl-text-dim) !important; }
+.tableWrapper .pager .controls .current { color: var(--rl-text) !important; }
+.tableWrapper .pager a { color: var(--rl-accent) !important; }
+.tableWrapper small { color: var(--rl-text-dim) !important; }
+
+/* Network/account switcher dropdown (top nav) */
+.expanded .accountsPanel { color: var(--rl-text) !important; }
+.expanded .switchTop, .expanded .switchDown,
+.expanded .switchMiddle, .expanded .switchMiddleBody {
+  background: var(--rl-panel-alt) !important;
+  border: 1px solid var(--rl-border) !important;
+}
+.expanded .switchTop { border-bottom: none !important; border-radius: var(--rl-radius) var(--rl-radius) 0 0 !important; }
+.expanded .switchDown { border-top: none !important; border-radius: 0 0 var(--rl-radius) var(--rl-radius) !important; }
+#oaNavigationExtra .accountSwitcher li.opt,
+#oaNavigationExtra .accountSwitcher li.more { color: var(--rl-text-dim) !important; }
+#oaNavigationExtra .accountSwitcher li.hover,
+#oaNavigationExtra .accountSwitcher .result ul li.hover a {
+  background-color: var(--rl-accent) !important;
+  color: #fff !important;
+}
+.accountSwitcher #accountSearch {
+  background: #0f1014 !important;
+  border: 1px solid var(--rl-border) !important;
+  color: var(--rl-text) !important;
+}
+.accountSwitcher #accountSearch:focus { background-color: #14151b !important; }
+
+/* ---------- Round 3: system message banners (confirm/info/warning/error) ---------- */
+div.message div.panel {
+  border-radius: var(--rl-radius) !important;
+  background: none !important;
+}
+div.message div.confirm {
+  color: #7ee6a0 !important;
+  background-color: rgba(34,197,94,0.12) !important;
+  border: 1px solid rgba(34,197,94,0.35) !important;
+  border-left: 3px solid #22c55e !important;
+}
+div.message div.confirm a { color: #a8f0bf !important; }
+
+div.message div.info {
+  color: #9cc9f5 !important;
+  background-color: rgba(59,130,246,0.12) !important;
+  border: 1px solid rgba(59,130,246,0.35) !important;
+  border-left: 3px solid #3b82f6 !important;
+}
+div.message div.info a { color: #bcdcff !important; }
+
+div.message div.warning {
+  color: #f5c98a !important;
+  background-color: rgba(249,115,22,0.12) !important;
+  border: 1px solid rgba(249,115,22,0.35) !important;
+  border-left: 3px solid #f97316 !important;
+}
+div.message div.warning a { color: #ffd9ac !important; }
+
+div.message div.error {
+  color: #f5a3a4 !important;
+  background-color: rgba(239,68,68,0.12) !important;
+  border: 1px solid rgba(239,68,68,0.35) !important;
+  border-left: 3px solid #ef4444 !important;
+}
+div.message div.error a { color: #ffc0c1 !important; }
+
+div.message div.panel div.icon,
+div.message div.panel div.topleft, div.message div.panel div.topright,
+div.message div.panel div.bottomleft, div.message div.panel div.bottomright {
+  background-image: none !important;
+}
+
+/* ---------- Round 4: found via real screenshots — page header, generic
+   panels, dashboard widget cards, widget toolbar tray. These all use
+   old-style 9-slice/gradient image sprites for a "white card" look, so we
+   have to explicitly kill background-image (not just background-color)
+   on every piece, then give the outer container a real solid dark
+   background + border-radius instead. ---------- */
+
+/* Third-level page header (e.g. "Banner Delivery Settings" title bar) */
+#thirdLevelHeader {
+  background: var(--rl-panel) !important;
+  border: 1px solid var(--rl-border) !important;
+  border-radius: var(--rl-radius) !important;
+}
+#thirdLevelHeader .corner { background-image: none !important; }
+#thirdLevelHeader h1, #thirdLevelHeader h2, #thirdLevelHeader .tab-s {
+  color: var(--rl-text) !important;
+}
+
+/* Generic rounded panel component (".panel"/".panel-plain") — reused
+   across many config/settings pages */
+.panel {
+  background: var(--rl-panel) !important;
+  border: 1px solid var(--rl-border) !important;
+  border-radius: var(--rl-radius) !important;
+  color: var(--rl-text) !important;
+}
+.panel .corner, .panel-plain .corner,
+.panel-plain div.topleft, .panel-plain div.topright,
+.panel-plain div.bottomleft, .panel-plain div.bottomright {
+  background-image: none !important;
+}
+.panel-plain {
+  background: var(--rl-panel) !important;
+  border: 1px solid var(--rl-border) !important;
+  border-radius: var(--rl-radius) !important;
+  color: var(--rl-text) !important;
+}
+.panel .split-left, .panel .split-right, .panel .top-split {
+  border-color: var(--rl-border) !important;
+}
+
+/* Dashboard widget cards ("Your Statistics" / "Campaign Overview" /
+   "Audit Trail" etc.) — old 9-slice sprite-border cards */
+div.widget, div.widgetFrame, div.widgetLeft, div.widgetRight,
+.hover div.widgetLeft, .hover div.widgetRight {
+  background-image: none !important;
+}
+div.widget {
+  background-color: var(--rl-panel) !important;
+  border: 1px solid var(--rl-border) !important;
+  border-radius: var(--rl-radius) !important;
+}
+div.widgetCenter { background: none !important; }
+div.widgetTitle { color: var(--rl-text) !important; }
+div.widgetContent, div.widgetBody { color: var(--rl-text-dim) !important; }
+div.widgetContent a, div.widgetBody a { color: var(--rl-accent) !important; }
+
+/* Widget "2" variant (same idea, different sprite set) */
+div.widget2Header, div.widget2Footer, div.widget2Left,
+div.widget2Right, div.widget2Body {
+  background-image: none !important;
+  background-color: var(--rl-panel) !important;
+}
+
+/* Widget toolbar tray ("Drag widgets from here to the main area") */
+div.widgetToolbarBodyContent, div.widgetToolbarBodyLeft, div.widgetToolbarBodyRight {
+  background-image: none !important;
+  background-color: var(--rl-panel-alt) !important;
+}
+div.widgetToolbar, div.widgetToolbarBody { color: var(--rl-text-dim) !important; }
+div.widgetToolbarTitle { color: var(--rl-text) !important; }
+
+/* Full-screen widget-picker overlay */
+div.dashboardOverlay { background-color: var(--rl-bg) !important; }
+div.widgetOverlayHeader, div.widgetOverlayFooter,
+div.widgetOverlayLeft, div.widgetOverlayRight, div.widgetOverlayCenter {
+  background-image: none !important;
+  background-color: var(--rl-panel) !important;
+}
+div.widgetOverlayContent a { color: var(--rl-accent) !important; }
+
+/* body.hasGradient variant of firstLevelContent (belt-and-braces —
+   the plain #firstLevelContent rule from round 1 already uses !important
+   and full shorthand, but this selector is more specific so make sure it
+   can never win) */
+body.hasGradient #firstLevelContent { background: var(--rl-bg) !important; }
