@@ -396,3 +396,155 @@ div.widgetOverlayContent a { color: var(--rl-accent) !important; }
    and full shorthand, but this selector is more specific so make sure it
    can never win) */
 body.hasGradient #firstLevelContent { background: var(--rl-bg) !important; }
+
+/* ============================================================
+   Round 5 — systematic pass: every light-background selector
+   found by scanning all original CSS files for #fff/#f6f6f6/
+   etc, plus a real font-size increase (base admin UI was
+   9-14px throughout, Broadstreet reads much larger/cleaner).
+   ============================================================ */
+
+/* ---- Typography: bump everything up ---- */
+body, table, td, th, p, li, label, a, span, div,
+input, select, textarea, button {
+  font-size: 14px !important;
+}
+h1 { font-size: 26px !important; }
+h2 { font-size: 20px !important; }
+h3 { font-size: 17px !important; }
+.tab-s { font-size: 22px !important; }
+small, .x-small { font-size: 12px !important; }
+
+/* ---- Configuration flyout submenu (#secondLevelNavigation) ---- */
+#secondLevelNavigation { background: none !important; }
+#secondLevelNavigation .navigation {
+  background: var(--rl-panel) !important;
+  border: 1px solid var(--rl-border) !important;
+  border-radius: var(--rl-radius) !important;
+}
+#secondLevelNavigation .navigation li,
+#secondLevelNavigation .navigation li .top,
+#secondLevelNavigation .navigation li .bottom,
+#secondLevelNavigation .navigation li.active .top,
+#secondLevelNavigation .navigation li.active .bottom {
+  background: none !important;
+  background-image: none !important;
+}
+#secondLevelNavigation .navigation li a {
+  color: var(--rl-text-dim) !important;
+}
+#secondLevelNavigation .navigation li.active a {
+  color: var(--rl-text) !important;
+}
+#secondLevelNavigation .navigation li.active ul {
+  background: var(--rl-panel-alt) !important;
+  border: 1px solid var(--rl-border) !important;
+}
+#secondLevelNavigation .navigation li.active ul li a {
+  background: none !important;
+  background-image: none !important;
+  color: var(--rl-text-dim) !important;
+}
+#secondLevelNavigation .navigation li.active ul li.active a,
+#secondLevelNavigation .navigation li.active ul li a:hover {
+  color: var(--rl-text) !important;
+  background: var(--rl-accent-soft) !important;
+}
+
+/* ---- Dropdown panels (breadcrumb / third-level-tools / table-wrapper) ---- */
+.tableWrapper .dropDown div.panel,
+#thirdLevelTools .dropDown div.panel,
+.breadcrumb .dropDown div.panel,
+.tableMessage .panel {
+  background: var(--rl-panel-alt) !important;
+  border: 1px solid var(--rl-border) !important;
+  color: var(--rl-text) !important;
+}
+.breadcrumb .dropDown.active span {
+  background: var(--rl-accent-soft) !important;
+  color: var(--rl-text) !important;
+}
+
+/* ---- Misc chrome.css light backgrounds ---- */
+#oaSection { background: var(--rl-bg) !important; }
+div.contextLinks { background: none !important; color: var(--rl-text-dim) !important; }
+#impressions_remaining_span, #clicks_remaining_span, #conversions_remaining_span {
+  background: var(--rl-accent-soft) !important;
+  color: var(--rl-text) !important;
+}
+table.global .odd td, table.global .odd th,
+table.data tr.even {
+  background-color: var(--rl-panel-alt) !important;
+}
+.entityList .column ul { background: var(--rl-panel) !important; }
+.wizard-steps li { background: var(--rl-panel-alt) !important; color: var(--rl-text-dim) !important; }
+#zxcvbn-container { background: var(--rl-panel-alt) !important; }
+.popup-help { background: var(--rl-accent-soft) !important; color: var(--rl-text) !important; border-color: var(--rl-border) !important; }
+
+/* ---- Inline messages / boxes (interface-ltr.css) ---- */
+div.errormessage, div.errormessageicon, div.infomessage, div#helpLayer {
+  background: rgba(239,68,68,0.12) !important;
+  color: #f5a3a4 !important;
+  border-color: rgba(239,68,68,0.35) !important;
+}
+div.infomessage { background: rgba(59,130,246,0.12) !important; color: #9cc9f5 !important; border-color: rgba(59,130,246,0.35) !important; }
+div.box, pre.invocation-codes, .invocationCodes pre {
+  background: var(--rl-panel-alt) !important;
+  color: var(--rl-text) !important;
+  border-color: var(--rl-border) !important;
+}
+select.error:focus, textarea.error:focus, input.error:focus,
+select.inerror, input.inerror, div.error-box {
+  background-color: rgba(239,68,68,0.15) !important;
+  color: var(--rl-text) !important;
+}
+
+/* ---- Targeting ratio rows ---- */
+.ratio-somewhat-off-target, table.targeting tbody tr.ratio-somewhat-off-target:hover {
+  background-color: rgba(249,115,22,0.12) !important;
+}
+.ratio-very-off-target, table.targeting tbody tr.ratio-very-off-target:hover {
+  background-color: rgba(239,68,68,0.12) !important;
+}
+table.targeting tbody tr:hover { background-color: var(--rl-panel-alt) !important; }
+
+/* ---- Generic light/dark shaded table-cell system (.table td.light etc) ---- */
+.table td.light, .table td.nblight, .table td.dblight,
+.section .light, .even, table.data-grid tr.odd, tr.hl {
+  background-color: var(--rl-panel) !important;
+  color: var(--rl-text) !important;
+}
+.table td.dark, .table td.nbdark, .section .dark, .odd {
+  background-color: var(--rl-panel-alt) !important;
+  color: var(--rl-text) !important;
+}
+.table td.redlight, .table td.nbredlight, div.error-box {
+  background-color: rgba(239,68,68,0.12) !important;
+}
+.table td.reddark, .table td.nbreddark {
+  background-color: rgba(239,68,68,0.18) !important;
+}
+.add, table.data-grid tr:hover, b.sr {
+  background-color: var(--rl-accent-soft) !important;
+}
+
+/* ---- Advertiser-specific highlight boxes ---- */
+.oa { background-color: rgba(34,197,94,0.12) !important; color: var(--rl-text) !important; }
+.sts-reason, .dev-note { background-color: var(--rl-panel-alt) !important; color: var(--rl-text-dim) !important; }
+
+/* ---- Campaign/zone linking UI ---- */
+#campaign-zone .zones tr.to-link { background-color: var(--rl-accent-soft) !important; }
+#campaign-zone .zones tr.just-linked { background-color: rgba(34,197,94,0.12) !important; }
+#campaign-zone .accurate-box { background-color: rgba(249,115,22,0.2) !important; color: var(--rl-text) !important; }
+#campaign-zone .topPagerContainer { background-color: var(--rl-panel-alt) !important; }
+#campaign-zone #select-all-container-linked th { background-color: var(--rl-panel-alt) !important; }
+
+/* ---- New-style tables ---- */
+table.new-table tr th { background-color: var(--rl-panel-alt) !important; color: var(--rl-text-dim) !important; }
+table.new-table tbody tr:hover td { background-color: var(--rl-panel-alt) !important; }
+
+/* ---- Dashboard misc ---- */
+div.widgetAdBody { background: var(--rl-panel) !important; }
+
+/* ---- Loading overlay ---- */
+.freeze-ui { background: var(--rl-bg) !important; opacity: 0.85 !important; }
