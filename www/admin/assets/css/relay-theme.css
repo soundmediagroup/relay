@@ -138,6 +138,18 @@ a:hover { color: var(--rl-accent-hover) !important; }
   padding: 24px !important;
   box-shadow: var(--rl-shadow-card) !important;
 }
+/* Pages with the left sub-nav (#secondLevelNavigation, e.g. Configuration/
+   Preferences) need the content panel pushed clear of it -- our flat
+   `margin: 20px` above was winning over the vendor's own
+   `.hasSidebar #secondLevelContent { margin: 0 0 0 184px }` (both
+   !important-free vs our !important), collapsing the left offset and
+   causing the content panel/title bar to render UNDER the sidebar list
+   (looked like a stray green active-tab ribbon and a floating title
+   "tooltip" overlapping the nav -- it was actually just the real page
+   title bar and active tab, mispositioned). */
+body.hasSidebar #secondLevelContent {
+  margin: 20px 20px 20px 204px !important;
+}
 .tableWrapper {
   background: var(--rl-panel) !important;
   border: 1px solid var(--rl-border) !important;
@@ -459,9 +471,14 @@ small, .x-small { font-size: 12px !important; }
 }
 #secondLevelNavigation .navigation li a {
   color: var(--rl-text-dim) !important;
+  background: none !important;
+  background-image: none !important;
 }
 #secondLevelNavigation .navigation li.active a {
   color: var(--rl-text) !important;
+  background: var(--rl-accent-soft) !important;
+  background-image: none !important;
+  border-radius: var(--rl-radius) !important;
 }
 #secondLevelNavigation .navigation li.active ul {
   background: var(--rl-panel-alt) !important;
