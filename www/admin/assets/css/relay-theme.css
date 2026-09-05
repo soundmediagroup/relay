@@ -23,30 +23,48 @@
    (Broadstreet screenshots) and rationale.
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap');
 
+/* ============================================================
+   Round 6 — precision pass. Downloaded Broadstreet's own live
+   compiled CSS (my.broadstreetads.com's public login page loads
+   application.css/tailwind.css/clean.css/inter-font.css as
+   unauthenticated static assets) and pulled the EXACT `.dark{}`
+   design-token block instead of guessing from screenshots.
+   These are their real Material-3-style semantic tokens,
+   values unchanged from source. Original guesses were close but
+   these are now exact.
+   ============================================================ */
 :root {
-  --rl-bg: #0c0c0f;
-  --rl-panel: #1a1b20;
-  --rl-panel-alt: #202127;
-  --rl-border: #2b2c33;
-  --rl-text: #f2f2f5;
-  --rl-text-dim: #9a9ba5;
-  --rl-accent: #7c6df0;
-  --rl-accent-hover: #6a5be0;
-  --rl-accent-soft: rgba(124,109,240,0.15);
+  --rl-bg: #1c1e20;            /* their --surface-canvas */
+  --rl-panel: #252729;         /* --surface-container-lowest */
+  --rl-panel-alt: #2e3032;     /* --surface-container-low */
+  --rl-panel-high: #383a3c;    /* --surface-container */
+  --rl-border: #424446;        /* --surface-container-high (= their --border-def-med) */
+  --rl-text: #e4e6e8;          /* --on-surface */
+  --rl-text-dim: #a0a2a4;      /* --on-surface-variant */
+  --rl-accent: #7b6bf0;        /* --primary */
+  --rl-accent-hover: #6a58e8;  /* --primary-dim */
+  --rl-accent-soft: rgba(123,107,240,0.15);
   --rl-success: #22c55e;
   --rl-success-soft: rgba(34,197,94,0.15);
-  --rl-danger: #f16d75;
-  --rl-radius: 10px;
-  --rl-radius-lg: 14px;
+  --rl-danger: #ef4444;
+  --rl-warning: #f59e0b;
+  --rl-info: #3b82f6;
+  --rl-radius: 12px;           /* their .rounded-xl */
+  --rl-radius-lg: 24px;        /* their .rounded-xxl/.rounded-3xl — Broadstreet's cards are VERY rounded */
   --rl-radius-pill: 999px;
+  --rl-shadow-card: 0 4px 12px -4px rgba(0,0,0,.5);
+  --rl-shadow-small: 0 1px 3px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.2);
 }
 
 html, body, body.hasInterface, body.hasGradient, body.hasSidebar {
   background: var(--rl-bg) !important;
   color: var(--rl-text) !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+}
+h1, h2, h3, .tab-s, #thirdLevelHeader .tab-s {
+  font-family: 'Manrope', 'Inter', -apple-system, sans-serif !important;
 }
 
 a { color: var(--rl-accent) !important; }
@@ -118,7 +136,7 @@ a:hover { color: var(--rl-accent-hover) !important; }
   border-radius: var(--rl-radius-lg) !important;
   margin: 20px !important;
   padding: 24px !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+  box-shadow: var(--rl-shadow-card) !important;
 }
 .tableWrapper {
   background: var(--rl-panel) !important;
@@ -165,6 +183,7 @@ input[type=submit], input[type=button], button, button.flat {
   padding: 10px 22px !important;
   font-weight: 600 !important;
   cursor: pointer !important;
+  box-shadow: 0 10px 25px -5px rgba(123,107,240,.35) !important;
 }
 input[type=submit]:hover, input[type=button]:hover, button:hover {
   background: var(--rl-accent-hover) !important;
@@ -179,7 +198,7 @@ form.login {
   border: 1px solid var(--rl-border) !important;
   border-radius: var(--rl-radius-lg) !important;
   padding: 32px !important;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.5) !important;
+  box-shadow: var(--rl-shadow-card) !important;
 }
 form.login table, form.login table tr, form.login table td {
   display: block !important;
@@ -333,8 +352,9 @@ div.message div.panel div.bottomleft, div.message div.panel div.bottomright {
 .panel {
   background: var(--rl-panel) !important;
   border: 1px solid var(--rl-border) !important;
-  border-radius: var(--rl-radius) !important;
+  border-radius: var(--rl-radius-lg) !important;
   color: var(--rl-text) !important;
+  box-shadow: var(--rl-shadow-small) !important;
 }
 .panel .corner, .panel-plain .corner,
 .panel-plain div.topleft, .panel-plain div.topright,
@@ -360,7 +380,8 @@ div.widget, div.widgetFrame, div.widgetLeft, div.widgetRight,
 div.widget {
   background-color: var(--rl-panel) !important;
   border: 1px solid var(--rl-border) !important;
-  border-radius: var(--rl-radius) !important;
+  border-radius: var(--rl-radius-lg) !important;
+  box-shadow: var(--rl-shadow-card) !important;
 }
 div.widgetCenter { background: none !important; }
 div.widgetTitle { color: var(--rl-text) !important; }
