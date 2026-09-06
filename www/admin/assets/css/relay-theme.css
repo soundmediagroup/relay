@@ -598,3 +598,77 @@ div.widgetAdBody { background: var(--rl-panel) !important; }
 
 /* ---- Loading overlay ---- */
 .freeze-ui { background: var(--rl-bg) !important; opacity: 0.85 !important; }
+
+/* ============================================================
+   Round 9 (6 Sep 2026) — top-bar quick search (#oaSearch).
+   Vendor draws the ENTIRE pill (rounded box + magnifier icon +
+   circular "go" arrow) as one light sprite image
+   (images/searchfull.png), with input.search positioned on top
+   with a transparent background, and input.submit as a 12x12px
+   icon-only button positioned over the sprite's arrow.
+   Two bugs stacked: (1) the light sprite itself was never
+   nulled, so the pill stayed light/white; (2) our generic
+   input[type=text]/input[type=submit] rules (sized and padded
+   for full-size fields/buttons) were still matching these and
+   forcing 8-12px padding + pill border-radius onto a
+   130x13px text field and a 12x12px icon button, producing the
+   oversized dark bar + purple oval blob Marc flagged. Fix:
+   null the sprite, rebuild the pill with flat dark styling, and
+   give input.search/input.submit their own reset so the generic
+   button/field rules never apply here. Icons are drawn with
+   inline SVG data-URIs so no new image asset is needed.
+   ============================================================ */
+#oaSearch {
+  background: var(--rl-panel) !important;
+  border: 1px solid var(--rl-border) !important;
+  border-radius: var(--rl-radius-pill) !important;
+  box-shadow: none !important;
+}
+#oaSearch input.search {
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  left: 30px !important;
+  color: var(--rl-text) !important;
+  box-shadow: none !important;
+}
+#oaSearch input.search:focus {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+#oaSearch input.submit {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 14px !important;
+  height: 14px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+}
+/* Search (magnifier) icon, left side */
+#oaSearch::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 9px;
+  width: 13px;
+  height: 13px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='10' cy='10' r='7' fill='none' stroke='%236f7180' stroke-width='2'/%3E%3Cline x1='15.5' y1='15.5' x2='21' y2='21' stroke='%236f7180' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  pointer-events: none;
+}
+/* Submit ("go") arrow, right side */
+#oaSearch::after {
+  content: "";
+  position: absolute;
+  right: 9px;
+  top: 9px;
+  width: 13px;
+  height: 13px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%237c6df0'/%3E%3Cpath d='M9 7l6 5-6 5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  pointer-events: none;
+}
